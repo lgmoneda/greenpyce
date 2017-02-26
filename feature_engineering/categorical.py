@@ -1,7 +1,14 @@
 import pandas as pd
 import numpy as np
 
-def RankCategorical(df, columns, inverse=False, new_column=False):
+def onehot(df, columns, new_columns=False):
+    """
+    Apply onehot encoding to the passed columns
+    """
+    dummies = pd.get_dummies(df, columns=columns)
+    return pd.concat([df, dummies], axis=1)
+    
+def rank_categorical(df, columns, inverse=False, new_column=False):
     """
     Encodes categories as its count rank
     """
@@ -20,7 +27,7 @@ def RankCategorical(df, columns, inverse=False, new_column=False):
         
     return df
 
-def LabelCount(df, columns, new_column=False):
+def label_count(df, columns, new_column=False):
     """
     Encodes categorical features as its count in the column.
     """
@@ -35,4 +42,3 @@ def LabelCount(df, columns, new_column=False):
 
 
 
-    print("All tests passed!")
