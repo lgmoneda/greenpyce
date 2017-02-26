@@ -25,3 +25,10 @@ class Test_Categorical_Feat_Eng():
         df = default_cat_df
         
         assert np.all(rank_categorical(df, ["names"])["names"].values == np.array([4, 3, 2, 2, 1, 1, 1])), "RankCategorical not working"
+
+    def test_target_encoding(self, default_cat_df):
+        df = default_cat_df
+        pytest.set_trace()        
+        df = target_encoding(df, ["names"], "target", new_column=True)
+
+        assert np.all(df["names"].values == np.array([10, 2, 4.5, 4.5, 2, 2, 2]))

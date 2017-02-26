@@ -59,3 +59,23 @@ rank_categorical(df, columns, inverse=False, new_column=False):
 6    John                      1
 
 ```
+  
+#### Target Encoding	  
+
+Encodes categories as its target mean
+
+```python
+target_encoding(df, columns, target, new_column=False):
+```
+  
+```
+    names  target  names_target_encoding
+0    Paul      10                   10.0
+1  George       2                    2.0
+2   Ringo       4                    4.5
+3   Ringo       5                    4.5
+4    John       1                    2.0
+5    John       3                    2.0
+6    John       2                    2.0
+
+```

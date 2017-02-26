@@ -41,4 +41,15 @@ def label_count(df, columns, new_column=False):
     return df
 
 
-
+def target_encoding(df, columns, target, new_column = False):
+    """
+    Encodes a categorical feature as its target mean
+    """
+    for column in columns:
+        
+        group = pd.groupby(df[[column, target]], column).mean()
+        new_column_name = column
+        if new_column:
+            new_column_name = column + "_target_encoding"
+        df[new_column_name] = df[column].apply(lambda x : group[group.index == x][target].values[0])
+        return df
