@@ -1,4 +1,5 @@
 from setuptools import setup
+from setuptools import find_packages
 
 setup(name='greenpyce',
       version='0.1',
@@ -7,5 +8,5 @@ setup(name='greenpyce',
       author='Luis Moneda',
       author_email='lgmoneda@gmail.com',
       license='MIT',
-      packages=['greenpyce'],
+      packages=find_packages(), 
       zip_safe=False)

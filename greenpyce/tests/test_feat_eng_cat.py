@@ -4,7 +4,7 @@ from feature_engineering.categorical import *
 from _fixtures import *
 import pandas as pd
 import numpy as np
-
+from feature_engineering.target_encoder import TargetEncoder
 
 class Test_Categorical_Feat_Eng():
 
@@ -28,7 +28,9 @@ class Test_Categorical_Feat_Eng():
 
     def test_target_encoding(self, default_cat_df):
         df = default_cat_df
-        pytest.set_trace()        
-        df = target_encoding(df, ["names"], "target", new_column=True)
-
+        
+        te = TargetEncoder(["names"], "target")
+        te.fit(df)
+        te.transform(df)
+        
         assert np.all(df["names"].values == np.array([10, 2, 4.5, 4.5, 2, 2, 2]))

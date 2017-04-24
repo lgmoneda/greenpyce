@@ -7,7 +7,7 @@ Utilities for the Python data analysis library Pandas.
 Apply onehot encoding to the passed columns
   
 ```python
-label_count(df, columns, new_column=False)
+onehot(df, columns, new_column=False)
 ```
   
 ```
@@ -65,7 +65,9 @@ rank_categorical(df, columns, inverse=False, new_column=False):
 Encodes categories as its target mean
 
 ```python
-target_encoding(df, columns, target, new_column=False):
+te = TargetEncoder(columns, target)
+te.fit(df)
+te.transform(df)
 ```
   
 ```
