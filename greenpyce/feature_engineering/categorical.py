@@ -1,12 +1,13 @@
 import pandas as pd
 import numpy as np
 
-def onehot(df, columns, new_columns=False):
+def onehot(df, columns, new_columns=False, drop_first=True):
     """
     Apply onehot encoding to the passed columns
     """
-    dummies = pd.get_dummies(df, columns=columns)
-    return pd.concat([df, dummies], axis=1)
+    dummies = pd.get_dummies(df, columns=columns, drop_first=drop_first)
+    return dummies
+    # return pd.concat([df, dummies], axis=1)
     
 def rank_categorical(df, columns, inverse=False, new_column=False):
     """
@@ -14,7 +15,7 @@ def rank_categorical(df, columns, inverse=False, new_column=False):
     """
     for column in columns:
         count = df[column].value_counts()
-        print(count)
+
         if inverse:
             count = count.sort_values()
         ranks = [i for i in range(1, count.shape[0] + 1)]
@@ -23,7 +24,7 @@ def rank_categorical(df, columns, inverse=False, new_column=False):
         if new_column:
             new_column_name = column + "_rankcategorical"
         df[new_column_name] = df[column].apply(lambda x : count[count.index == x].values[0][0])
-        print(df)
+
         
     return df
 
