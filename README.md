@@ -1,7 +1,19 @@
 # greenpyce
 Utilities for the Python data analysis library Pandas.
 
-## Feature Engineering  
+1. [Feature Engeering](#feature-engineering)  
+    1. [Categorical](#categorical)  
+         1. [One-Hot](#one-hot-encoding)  
+         2. [Label Count](#label-count)  
+         3. [Rank Categories](#rank-categories)  
+         4. [Target Encoding](#target-encoding)  
+    2. [Dates](#dates)  
+         1. [Time Delta](#time-delta)  
+		 2. [Expand Date](#expand-date)  
+		 3. [Day of Week](#day-of-week)  
+		 4. [Period of Day](#period-of-day)
+
+## Feature Engineering  <a name="#feature_engineering"> </a>
 ### Categorical
 #### One-Hot Encoding
 Apply onehot encoding to the passed columns
@@ -25,7 +37,9 @@ onehot(df, columns, new_column=False)
 Encodes categorical features as its count in the column.
 
 ```python
-label_count(df, columns, new_column=False)
+lc = LabelCount(["names"])
+lc.fit(df)
+lc.transform(df)
 ```
 
 ```
@@ -45,7 +59,9 @@ label_count(df, columns, new_column=False)
 Encodes categories as its count rank
 
 ```python
-rank_categorical(df, columns, inverse=False, new_column=False):
+rc = RankCategorical(["names"], inverse=False, new_column=False)
+rc.fit(df)
+rc.transform(df)
 ```
   
 ```
@@ -60,12 +76,12 @@ rank_categorical(df, columns, inverse=False, new_column=False):
 
 ```
   
-#### Target Encoding	  
+#### Target Encoding	  <a name="#target_encoding"> </a>
 
 Encodes categories as its target mean
 
 ```python
-te = TargetEncoder(columns, target)
+te = TargetEncoder(["names"], "target")
 te.fit(df)
 te.transform(df)
 ```
@@ -81,3 +97,9 @@ te.transform(df)
 6    John       2                    2.0
 
 ```
+### Dates
+Feature creation based on date information  
+
+#### Time Delta
+
+#### Expand Date

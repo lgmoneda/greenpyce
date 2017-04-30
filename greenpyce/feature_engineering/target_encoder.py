@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 class TargetEncoder(object):
 
@@ -24,5 +25,7 @@ class TargetEncoder(object):
             new_column_name = column
             # if new_column:
             #     new_column_name = column + "_target_encoding"
-            df[new_column_name] = df[column].apply(lambda x : self.means_dict[column][self.target][x])
+            
+            missing = np.mean(np.array(self.means_dict[column][self.target].values()))
+            df[new_column_name] = df[column].apply(lambda x : self.means_dict[column][self.target].get(x, missing))
         

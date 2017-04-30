@@ -7,6 +7,7 @@ import numpy as np
 from feature_engineering.target_encoder import TargetEncoder
 from feature_engineering.rank_categorical import RankCategorical
 from feature_engineering.label_count import LabelCount
+from feature_engineering.date import time_count_between_dates
 
 class Test_Categorical_Feat_Eng():
 
