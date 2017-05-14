@@ -21,7 +21,7 @@ class RankCategorical(object):
                 count = count.sort_values()
             ranks = [i for i in range(1, count.shape[0] + 1)]
             count = pd.DataFrame(ranks, index=count.index.values)
-            self.rank_dict[column] = count.to_dict()
+            self.rank_dict[column] = count
         
     def transform(self, df):
         for column in self.columns:
@@ -33,8 +33,7 @@ class RankCategorical(object):
 
             missing = len(self.rank_dict) / 2
                         
-
-            df[new_column_name] = df[column].apply(lambda x : self.rank_dict[column][0].get(x, missing))
+            df[new_column_name] = df[column].apply(lambda x : self.rank_dict[column].ix[x].values[0])
 
                 
 
