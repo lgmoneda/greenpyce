@@ -14,9 +14,7 @@ class TargetEncoder(object):
             self.means_dict[column] = {}
 
     def fit(self, df):
-
         for column in self.columns:
-        
             group = pd.groupby(df[[column, self.target]], column).mean()
             self.means_dict[column] = group
             
