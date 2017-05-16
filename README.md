@@ -13,7 +13,7 @@ Utilities for the Python data analysis library Pandas.
 		 3. [Day of Week](#day-of-week)  
 		 4. [Period of Day](#period-of-day)
 
-## Feature Engineering  <a name="#feature_engineering"> </a>
+## Feature Engineering  
 ### Categorical
 #### One-Hot Encoding
 Apply onehot encoding to the passed columns
