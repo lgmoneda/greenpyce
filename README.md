@@ -75,8 +75,8 @@ rc.transform(df)
 6    John                      1
 
 ```
-  
-#### Target Encoding	  <a name="#target_encoding"> </a>
+
+#### Target Encoding
 
 Encodes categories as its target mean
 

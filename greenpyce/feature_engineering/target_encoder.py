@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 
+
 class TargetEncoder(object):
 
     def __init__(self, columns, target, new_column=False):
@@ -10,11 +11,9 @@ class TargetEncoder(object):
         self.new_column = new_column
             
     def fit(self, df):
-
         for column in self.columns:
-        
             group = pd.groupby(df[[column, self.target]], column).mean()
-            self.means_dict[column] = group.to_dict()
+            self.means_dict[column] = group
             
     def transform(self, df):
         for column in self.columns:
@@ -26,3 +25,4 @@ class TargetEncoder(object):
             missing = np.mean(np.array(self.means_dict[column][self.target].values()))
             df[new_column_name] = df[column].apply(lambda x : self.means_dict[column][self.target].get(x, missing))
         
+                
