@@ -8,9 +8,6 @@ class RankCategorical(object):
         self.new_column = new_column
         self.inverse = inverse
         
-        for column in columns:
-            self.rank_dict[column] = {}
-
     
     def fit(self, df):
 
@@ -21,7 +18,7 @@ class RankCategorical(object):
                 count = count.sort_values()
             ranks = [i for i in range(1, count.shape[0] + 1)]
             count = pd.DataFrame(ranks, index=count.index.values)
-            self.rank_dict[column] = count
+            self.rank_dict[column] = count.to_dict()
         
     def transform(self, df):
         for column in self.columns:
@@ -33,7 +30,7 @@ class RankCategorical(object):
 
             missing = len(self.rank_dict) / 2
                         
-            df[new_column_name] = df[column].apply(lambda x : self.rank_dict[column].ix[x].values[0])
+            df[new_column_name] = df[column].apply(lambda x : self.rank_dict[column][0].get(x, missing))
 
                 
 

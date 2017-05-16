@@ -7,16 +7,13 @@ class LabelCount(object):
         self.columns = columns
         self.new_column = new_column
         
-        for column in columns:
-            self.count_dict[column] = {}
-
     
     def fit(self, df):
 
         for column in self.columns:
             count = df[column].value_counts()
             
-            self.count_dict[column] = count
+            self.count_dict[column] = count.to_dict()
         
     def transform(self, df):
         for column in self.columns:
@@ -27,8 +24,8 @@ class LabelCount(object):
                 new_column_name = column + "_label_count"
 
             missing = 1
-            
-            df[new_column_name] = df[column].apply(lambda x : self.count_dict[column].ix[x])
+            df[new_column_name] = df[column].apply(lambda x : self.count_dict[column].get(x, missing))            
+
 
         
 
