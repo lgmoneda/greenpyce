@@ -13,21 +13,27 @@ def time_count_between_dates(df, base_column, diff_columns, units="DMY"):
     units = [unit for unit in units]
     
     for column in diff_columns:
-        delta = (df[column] - df[base_column]).apply(lambda x: x.days)
+        try:
+            delta = (df[column] - df[base_column]).apply(lambda x: x.days)
+        except:
+            delta = df.apply(lambda x: (x[column] - x[base_column]).days, axis=1)
         for unit in units:
             df["diff_" + column + "_AND_" + base_column + "_" + unit] = delta / unit_dict[unit]
             
     del delta
     return df
 
-def expand_date_info(df, columns, hour_feats=False):
+def expand_date_info(df, columns, hour_feats=False, day=True, month=True, year=True):
     """
     Create year, month, day, hour and minute from a datetime column.
     """
     for column in columns:
-        df[column + "_DAY"] = df[column].apply(lambda x: x.day)
-        df[column + "_MONTH"] = df[column].apply(lambda x: x.month)
-        df[column + "_YEAR"] = df[column].apply(lambda x: x.year)
+        if day:
+            df[column + "_DAY"] = df[column].apply(lambda x: x.day)
+        if month:
+            df[column + "_MONTH"] = df[column].apply(lambda x: x.month)
+        if year:
+            df[column + "_YEAR"] = df[column].apply(lambda x: x.year)
         if hour_feats:
             df[column + "_HOUR"] = df[column].apply(lambda x: x.hour)
 
