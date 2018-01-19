@@ -3,8 +3,8 @@ sys.path.append("../")
 from _fixtures import *
 import pandas as pd
 import numpy as np
-from feature_engineering.numerical import count_zeros
-from feature_engineering.numerical import count_non_zeros
+from feature_engineering.row_statistics import count_non_zeros
+from feature_engineering.row_statistics import count_zeros
 
 class Test_Num_Feat_Eng():
 

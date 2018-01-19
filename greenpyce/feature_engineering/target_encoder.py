@@ -22,7 +22,7 @@ class TargetEncoder(object):
             if self.new_column:
                 new_column_name = column + "_target_encoding"
             
-            missing = np.mean(np.array(self.means_dict[column][self.target].values()))
+            missing = np.mean(np.array(list(self.means_dict[column][self.target].values())))
             df[new_column_name] = df[column].apply(lambda x : self.means_dict[column][self.target].get(x, missing))
         
                 
