@@ -12,7 +12,7 @@ class TargetEncoder(object):
             
     def fit(self, df):
         for column in self.columns:
-            group = pd.groupby(df[[column, self.target]], column).mean()
+            group = df[[column, self.target]].groupby(column).mean()
             self.means_dict[column] = group.to_dict()
             
     def transform(self, df):
@@ -23,6 +23,6 @@ class TargetEncoder(object):
                 new_column_name = column + "_target_encoding"
             
             missing = np.mean(np.array(list(self.means_dict[column][self.target].values())))
-            df[new_column_name] = df[column].apply(lambda x : self.means_dict[column][self.target].get(x, missing))
+            df.loc[:, new_column_name] = df[column].apply(lambda x : self.means_dict[column][self.target].get(x, missing))
         
                 

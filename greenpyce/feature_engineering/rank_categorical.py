@@ -30,7 +30,7 @@ class RankCategorical(object):
 
             missing = len(self.rank_dict) / 2
                         
-            df[new_column_name] = df[column].apply(lambda x : self.rank_dict[column][0].get(x, missing))
+            df.loc[:, new_column_name] = df[column].apply(lambda x : self.rank_dict[column][0].get(x, missing))
 
                 
 

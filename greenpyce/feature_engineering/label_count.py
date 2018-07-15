@@ -24,7 +24,7 @@ class LabelCount(object):
                 new_column_name = column + "_label_count"
 
             missing = 1
-            df[new_column_name] = df[column].apply(lambda x : self.count_dict[column].get(x, missing))            
+            df.loc[:, new_column_name] = df[column].apply(lambda x : self.count_dict[column].get(x, missing))            
 
 
         
